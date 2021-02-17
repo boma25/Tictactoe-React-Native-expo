@@ -23,7 +23,9 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#4F6D7A"
-      }
+      },
+      "package": "com.imaginatia.tictactoe",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
