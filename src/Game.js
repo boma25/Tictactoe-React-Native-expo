@@ -46,14 +46,134 @@ class Game extends Component {
 
 	computerPlay() {
 		let computerHasPlayed = false
-		let row, col
+		let row,
+			col,
+			i = 0,
+			j = 0
 		if (!this.state.won) {
 			while (!computerHasPlayed) {
-				row = Math.floor(Math.random() * (3 - 0)) + 0
-				col = Math.floor(Math.random() * (3 - 0)) + 0
-				if (this.state.currentGameState[row][col] === 0) {
-					this.onTilePress(row, col)
-					computerHasPlayed = true
+				let currentGameState = this.state.currentGameState
+				const sum = (x, y) => {
+					const ans = x + y
+					if (ans === 2) {
+						return true
+					} else {
+						return false
+					}
+				}
+
+				if (i === 0) {
+					if (
+						sum(currentGameState[i][j], currentGameState[i][j + 1]) &&
+						currentGameState[i][j + 2] === 0
+					) {
+						this.onTilePress(i, j + 2)
+						computerHasPlayed = true
+					} else if (
+						sum(currentGameState[i][j], currentGameState[i + 1][j]) &&
+						currentGameState[i + 2][j] === 0
+					) {
+						this.onTilePress(i + 2, j)
+						computerHasPlayed = true
+					} else if (
+						sum(currentGameState[i][j], currentGameState[i + 1][j + 1]) &&
+						currentGameState[i + 2][j + 2] === 0
+					) {
+						this.onTilePress(i + 2, j + 2)
+						computerHasPlayed = true
+					} else if (
+						sum(currentGameState[i + 1][j], currentGameState[i + 1][j + 1]) &&
+						currentGameState[i + 1][j + 2] === 0
+					) {
+						this.onTilePress(i + 1, j + 2)
+						computerHasPlayed = true
+					} else if (
+						sum(currentGameState[i + 2][j], currentGameState[i + 1][j]) &&
+						currentGameState[i][j] === 0
+					) {
+						this.onTilePress(i, j)
+						computerHasPlayed = true
+					} else if (
+						sum(currentGameState[i + 2][j], currentGameState[i + 2][j + 1]) &&
+						currentGameState[i + 2][j + 2] === 0
+					) {
+						this.onTilePress(i + 2, j + 2)
+						computerHasPlayed = true
+					} else if (
+						sum(currentGameState[i + 2][j], currentGameState[i + 1][j + 1]) &&
+						currentGameState[i][j + 2] === 0
+					) {
+						this.onTilePress(i, j + 2)
+						computerHasPlayed = true
+					} else if (
+						sum(currentGameState[i][j], currentGameState[i + 2][j]) &&
+						currentGameState[i + 1][j] === 0
+					) {
+						this.onTilePress(i + 1, j)
+						computerHasPlayed = true
+					} else {
+						i = 2
+						j = 2
+					}
+				} else if (i === 2) {
+					if (
+						sum(currentGameState[i][j], currentGameState[i][j - 1]) &&
+						currentGameState[i][j - 2] === 0
+					) {
+						this.onTilePress(i, j - 2)
+						computerHasPlayed = true
+					} else if (
+						sum(currentGameState[i][j], currentGameState[i - 1][j]) &&
+						currentGameState[i - 2][j] === 0
+					) {
+						this.onTilePress(i - 2, j)
+						computerHasPlayed = true
+					} else if (
+						sum(currentGameState[i][j], currentGameState[i - 1][j - 1]) &&
+						currentGameState[i - 2][j - 2] === 0
+					) {
+						this.onTilePress(i - 2, j - 2)
+						computerHasPlayed = true
+					} else if (
+						sum(currentGameState[i - 1][j], currentGameState[i - 1][j - 1]) &&
+						currentGameState[i - 1][j - 2] === 0
+					) {
+						this.onTilePress(i - 1, j - 2)
+						computerHasPlayed = true
+					} else if (
+						sum(currentGameState[i - 2][j], currentGameState[i - 1][j]) &&
+						currentGameState[i][j] === 0
+					) {
+						this.onTilePress(i, j)
+						computerHasPlayed = true
+					} else if (
+						sum(currentGameState[i - 2][j], currentGameState[i - 2][j - 1]) &&
+						currentGameState[i - 2][j - 2] === 0
+					) {
+						this.onTilePress(i - 2, j - 2)
+						computerHasPlayed = true
+					} else if (
+						sum(currentGameState[i - 2][j], currentGameState[i - 1][j - 1]) &&
+						currentGameState[i][j - 2] === 0
+					) {
+						this.onTilePress(i, j - 2)
+						computerHasPlayed = true
+					} else if (
+						sum(currentGameState[i][j], currentGameState[i - 2][j]) &&
+						currentGameState[i - 1][j] === 0
+					) {
+						this.onTilePress(i - 1, j)
+						computerHasPlayed = true
+					} else {
+						i = 1
+					}
+				} else {
+					row = Math.floor(Math.random() * (3 - 0)) + 0
+					col = Math.floor(Math.random() * (3 - 0)) + 0
+					if (this.state.currentGameState[row][col] === 0) {
+						this.onTilePress(row, col)
+						computerHasPlayed = true
+					}
 				}
 			}
 		}
@@ -83,6 +203,8 @@ class Game extends Component {
 					onPress: () => this.props.navigation.pop(),
 				},
 			])
+		} else {
+			this.getWinner()
 		}
 	}
 
@@ -100,9 +222,9 @@ class Game extends Component {
 	setBoard(row, col) {
 		let value = this.state.currentGameState[row][col]
 		if (value === 1) {
-			return <Text style={{ ...styles.piece, color: "blue" }}>x</Text>
+			return <Text style={{ ...styles.piece, color: "#0812FC" }}>x</Text>
 		} else if (value === -1) {
-			return <Text style={{ ...styles.piece, color: "#00FF00" }}>o</Text>
+			return <Text style={{ ...styles.piece, color: "#14F597" }}>o</Text>
 		} else {
 			return <Text style={{ ...styles.piece }}></Text>
 		}
@@ -112,6 +234,7 @@ class Game extends Component {
 		let saveArr = this.state.currentGameState
 		if (saveArr[row][col] !== 0) {
 			alert("tile already selected")
+			console.log([row, col])
 			return
 		}
 		saveArr[row][col] = this.state.currentPlayer
@@ -119,8 +242,7 @@ class Game extends Component {
 			currentGameState: saveArr,
 			currentPlayer: prevState.currentPlayer === 1 ? -1 : 1,
 		}))
-
-		this.getWinner()
+		this.checkForDraw()
 	}
 
 	getWinner() {
@@ -271,7 +393,6 @@ class Game extends Component {
 				]
 			)
 		}
-		this.checkForDraw()
 	}
 	render() {
 		return (
@@ -360,16 +481,18 @@ class Game extends Component {
 				<TouchableOpacity
 					onPress={() => this.props.navigation.pop()}
 					style={{
-						backgroundColor: "#00FF00",
-						width: 70,
+						backgroundColor: "#fff",
+						width: 80,
 						height: 40,
-						borderRadius: 20,
+						borderRadius: 15,
 						alignItems: "center",
 						justifyContent: "center",
 						marginBottom: -height / 5,
 					}}
 				>
-					<Text style={{ fontSize: 17, color: "#fff" }}>Home</Text>
+					<Text style={{ fontSize: 17, fontWeight: "700", color: "#14F597" }}>
+						Home
+					</Text>
 				</TouchableOpacity>
 			</View>
 		)
@@ -380,12 +503,13 @@ const styles = StyleSheet.create({
 	box: {
 		width: 70,
 		height: 70,
-		borderWidth: 3,
+		borderWidth: 1.8,
 		alignItems: "center",
 		justifyContent: "center",
 	},
 	piece: {
 		fontSize: 60,
+		fontWeight: "700",
 	},
 })
 export default Game
