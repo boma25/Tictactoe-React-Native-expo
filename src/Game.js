@@ -205,16 +205,18 @@ class Game extends Component {
 			this.setState({
 				won: true,
 			})
-			Alert.alert("TicTacToe", "its a draw", [
-				{
-					text: "play again",
-					onPress: () => this.newGame(),
-				},
-				{
-					text: "exit",
-					onPress: () => this.props.navigation.pop(),
-				},
-			])
+			setTimeout(() => {
+				Alert.alert("TicTacToe", "its a draw", [
+					{
+						text: "play again",
+						onPress: () => this.newGame(),
+					},
+					{
+						text: "exit",
+						onPress: () => this.props.navigation.pop(),
+					},
+				])
+			}, 500)
 		} else {
 			this.getWinner()
 		}
@@ -267,24 +269,8 @@ class Game extends Component {
 				this.setState({
 					won: true,
 				})
-				Alert.alert("TicTacToe", "player 1 is the winner", [
-					{
-						text: "play again",
-						onPress: () => this.newGame(),
-					},
-					{
-						text: "exit",
-						onPress: () => this.props.navigation.pop(),
-					},
-				])
-			} else if (sum === -3) {
-				this.setState({
-					won: true,
-				})
-				Alert.alert(
-					"TicTacToe",
-					`${this.state.twoPlayer ? "player 2" : "computer"} is the winner`,
-					[
+				setTimeout(() => {
+					Alert.alert("TicTacToe", "player 1 is the winner", [
 						{
 							text: "play again",
 							onPress: () => this.newGame(),
@@ -293,8 +279,28 @@ class Game extends Component {
 							text: "exit",
 							onPress: () => this.props.navigation.pop(),
 						},
-					]
-				)
+					])
+				}, 500)
+			} else if (sum === -3) {
+				this.setState({
+					won: true,
+				})
+				setTimeout(() => {
+					Alert.alert(
+						"TicTacToe",
+						`${this.state.twoPlayer ? "player 2" : "computer"} is the winner`,
+						[
+							{
+								text: "play again",
+								onPress: () => this.newGame(),
+							},
+							{
+								text: "exit",
+								onPress: () => this.props.navigation.pop(),
+							},
+						]
+					)
+				}, 500)
 			}
 		}
 		for (i = 0; i < 3; i++) {
@@ -304,24 +310,8 @@ class Game extends Component {
 				this.setState({
 					won: true,
 				})
-				Alert.alert("TicTacToe", "player 1 is the winner", [
-					{
-						text: "play again",
-						onPress: () => this.newGame(),
-					},
-					{
-						text: "exit",
-						onPress: () => this.props.navigation.pop(),
-					},
-				])
-			} else if (sum === -3) {
-				this.setState({
-					won: true,
-				})
-				Alert.alert(
-					"TicTacToe",
-					`${this.state.twoPlayer ? "player 2" : "computer"} is the winner`,
-					[
+				setTimeout(() => {
+					Alert.alert("TicTacToe", "player 1 is the winner", [
 						{
 							text: "play again",
 							onPress: () => this.newGame(),
@@ -330,8 +320,28 @@ class Game extends Component {
 							text: "exit",
 							onPress: () => this.props.navigation.pop(),
 						},
-					]
-				)
+					])
+				}, 500)
+			} else if (sum === -3) {
+				this.setState({
+					won: true,
+				})
+				setTimeout(() => {
+					Alert.alert(
+						"TicTacToe",
+						`${this.state.twoPlayer ? "player 2" : "computer"} is the winner`,
+						[
+							{
+								text: "play again",
+								onPress: () => this.newGame(),
+							},
+							{
+								text: "exit",
+								onPress: () => this.props.navigation.pop(),
+							},
+						]
+					)
+				}, 500)
 			}
 		}
 
