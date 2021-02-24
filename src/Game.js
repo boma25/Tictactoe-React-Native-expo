@@ -404,7 +404,7 @@ class Game extends Component {
 					height: height,
 				}}
 			>
-				<View>
+				<View style={{ justifyContent: "flex-end", height: height / 2 }}>
 					<View style={{ flexDirection: "row" }}>
 						<TouchableOpacity
 							onPress={() => this.onTilePress(0, 0)}
@@ -487,7 +487,6 @@ class Game extends Component {
 						borderRadius: 15,
 						alignItems: "center",
 						justifyContent: "center",
-						marginBottom: -height / 5,
 					}}
 				>
 					<Text style={{ fontSize: 17, fontWeight: "700", color: "#14F597" }}>
