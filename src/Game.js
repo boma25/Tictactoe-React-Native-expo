@@ -111,6 +111,18 @@ class Game extends Component {
 					) {
 						this.onTilePress(i + 1, j)
 						computerHasPlayed = true
+					} else if (
+						sum(currentGameState[i][j], currentGameState[i + 2][j + 2]) &&
+						currentGameState[i + 1][j + 1] === 0
+					) {
+						this.onTilePress(i + 1, j + 1)
+						computerHasPlayed = true
+					} else if (
+						sum(currentGameState[i][j + 2], currentGameState[i + 2][j]) &&
+						currentGameState[i + 1][j + 1] === 0
+					) {
+						this.onTilePress(i + 1, j + 1)
+						computerHasPlayed = true
 					} else {
 						i = 2
 						j = 2
